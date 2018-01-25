@@ -291,7 +291,7 @@ module.exports = (user, channel, text = '', command = {}, botToken = null, callb
 		var item = locations[name];
 
 		if (item == undefined) {
-			command = {'text': 'I don\'t know where that is. Howerver, here are the locations I do know: \n', attachments: []};
+			command = {'text': 'I don\'t know where that is. However, here are the locations I do know: \n', attachments: []};
 			command.text += locationString
 		} else {
 			if (item.type == 'sponsor') {
@@ -299,6 +299,13 @@ module.exports = (user, channel, text = '', command = {}, botToken = null, callb
 			}else {
 				command.text = item.place;
 			}
+		}
+	}
+
+	if (text.trim('string').length < 1) {
+		command = {
+			text: param.help.text,
+			attachments: []
 		}
 	}
 

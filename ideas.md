@@ -11,4 +11,5 @@
 - ~~mentors link~~
 - ~~workshop link~~
 - ~~change back slash to forward slash~~
-- add a list of sponsors under sponsor command
+- ~~add a list of sponsors under sponsor command~~
+- add emergency information

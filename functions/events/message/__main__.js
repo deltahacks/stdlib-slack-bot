@@ -26,7 +26,7 @@ module.exports = (user, channel, text = '', event = {}, botToken = null, callbac
     callback(null, {
       text: `AAARARRRGWWWH!`
     });
-  }else if (text.match(/\b(chewbacca|chewie)\b/ig)) {
+  }else if (text.match(/\b(force)\b/ig)) {
     callback(null, {
       text: `May the force be with you, <@${user}>!`
     });
