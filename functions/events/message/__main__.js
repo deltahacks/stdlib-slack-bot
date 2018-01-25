@@ -18,9 +18,9 @@ const lib = require('lib')({token: process.env.STDLIB_TOKEN});
 module.exports = (user, channel, text = '', event = {}, botToken = null, callback) => {
 
   // Only send a response to certain messages
-  if (text.match(/\b(friday)\b/ig)) {
+  if (text.match(/\b(@?friday)\b/ig)) {
     callback(null, {
-      text: `Did someone call my name? Try typing \`/friday\` to see magic!`
+      text: `Did someone call my name? Try typing \`/friday\` to see some magic!`
     });
   }else if (text.match(/\b(chewbacca|chewie)\b/ig)) {
     callback(null, {
