@@ -18,25 +18,19 @@ const lib = require('lib')({token: process.env.STDLIB_TOKEN});
 module.exports = (user, channel, text = '', event = {}, botToken = null, callback) => {
 
   // Only send a response to certain messages
-  if (text.match(/chewbacca|chewie/i)) {
+  if (text.match(/\b(friday)\b/ig)) {
+    callback(null, {
+      text: `Did someone call my name? Try typing \`/friday\` to see magic!`
+    });
+  }else if (text.match(/\b(chewbacca|chewie)\b/ig)) {
     callback(null, {
       text: `AAARARRRGWWWH!`
     });
-  }else if (text.match(/hey|hello|hi|sup/i)) {
-    callback(null, {
-      text: `Hey there! <@${user}> said ${text}`
-    });
-  }else if (text.match(/yoda|luke|force/i)) {
+  }else if (text.match(/\b(chewbacca|chewie)\b/ig)) {
     callback(null, {
       text: `May the force be with you, <@${user}>!`
     });
   } else {
     callback(null, {});
-  }
-
-  if (text.match(/chewbacca|chewie/i)) {
-    callback(null, {
-      text: `AAARARRRGWWWH!`
-    });
   }
 };
