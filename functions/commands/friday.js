@@ -37,47 +37,57 @@ module.exports = (user, channel, text = '', command = {}, botToken = null, callb
 		'schedule': {
 			text: `Please check out our schedule at ${url.schedule}`,
 			attachments: [],// add attachment here?
-			description: 'description for schedule'
+			description: 'find out when everything is happening'
 		},
 		'map': {
 			text: `For ETB floor plan, please visit ${url.etbmap} \n For McMaster University map, please visit ${url.map}`,
 			attachments: [],// add attachment here?
-			description: 'description for map'
+			description: 'ask me for maps if you are lost'
 		},
 		'where is': {
 			text: ``,
 			attachments: [],
-			description: 'where is description for <>'
+			description: 'find out where things are'
 		},
 		'sponsors': {
 			text: `You can check out our spectacular sponsors here: ${url.sponsors}! \n You can also try \`${slashCommand} where is <sponsor name>\` to find out where their tables are! \n Here are the sponsors who are at the hackathon: \n`,
 			attachments: [],
-			description: 'description for sponsors'
+			description: 'find out more about our awesome sponsors!'
 		},
 		'who are you': {
-			text: `Hello, <@${user}>! I am Friday! I am a serverless slack bot built with *StdLib*. Do you know that, StdLib is DeltaHacks\' title sponsor? Go talk to them in ETB 126!`,
+			text: `Hello, <@${user}>! I am Friday! I am a serverless slack bot built with *StdLib*. Did you know that StdLib is DeltaHacks\' title sponsor? Go talk to them in ETB 126!`,
 			attachments: [],
-			description: 'who are description for you'
+			description: 'want to know more about me, you do?'
 		},
 		'prizes': {
 			text: `We have over $10K in prizes! Check out our list of prizes at https://deltahacksiv.hackerearth.com/#prizes`,
 			attachments: [],
-			description: 'description for prizes'
+			description: 'ask me to know how to win all the terrific prizes!'
 		},
 		'challenges': {
 			text: `You can view all the fascinating challenges/app ideas here: ${url.challenges}`,
 			attachments: [],
-			description: 'description for challenges'
+			description: 'want to *make a difference* in the world? Try to make these challenges into reality!'
 		},
 		'mentors': {
-			text: `You can check out our awesome mentors here: ${url.mentors}`,
+			text: `You can check out our awesome mentors here: ${url.mentors}. The mentor hub is in ETB 124`,
 			attachments: [],
-			description: ''
+			description: 'find out how to get help with your project!'
 		},
 		'workshops': {
-			text: `You can check out our amazing workshops here: ${url.workshops}`,
+			text: `You can check out our amazing workshops here: ${url.workshops}. They take place in ETB room 228 or 230 between 3PM to 7PM.`,
 			attachments: [],
-			description: ''
+			description: 'learn new technologies from our sponsors!'
+		},
+		'emergency': {
+            text: `If fire or medical *emergency* when *immediate action* is required, dail 905-522-4135. \n For non-emergency assistance, reach out to volunteers in white or black DeltaHacks T-shirt or the help desk in ETB lobby.`,
+            attachments: [],
+            description: 'dail 905-522-4135 for fire or medical *emergency* when *immediate action* is required'
+        },
+		'sleep': {
+			text: `Sleeping rooms are in ETB 235, 256, and 224. They open from Sat. 10PM to Sun 10AM.`,
+            attachments: [],
+            description: 'to sleep or to caffeinate, that is the question'
 		}
 	};
 
@@ -209,13 +219,13 @@ module.exports = (user, channel, text = '', command = {}, botToken = null, callb
 			name: 'Workshop',
 			type: 'room',
 			command: '',
-			place: `Work shops take place on ETB 2nd floor in both room 228 and 230. ${etbMapSentence} ${param.workshops.text}`,
+			place: `Workshops take place on ETB 2nd floor in both room 228 and 230. ${etbMapSentence} ${param.workshops.text}`,
 		},
 		'lunch': {
 			name: 'lunch',
 			type: 'meal',
 			command: '',
-			place: `All lunches will be in ETB basement.${etbMapSentence}`,
+			place: `All lunches will be in ETB basement. ${etbMapSentence}`,
 		},
 		'dinner': {
 			name: 'dinner',
@@ -239,7 +249,7 @@ module.exports = (user, channel, text = '', command = {}, botToken = null, callb
 			name: 'closing',
 			type: 'room',
 			command: '',
-			place: `Closng Ceremony will be in MDCL 1305/1307. Here is the McMaster University map: ${url.map}`,
+			place: `Closing Ceremony will be in MDCL 1305/1307. Here is the McMaster University map: ${url.map}`,
 		},
 		'bus': {
 			name: 'bus',
@@ -251,8 +261,21 @@ module.exports = (user, channel, text = '', command = {}, botToken = null, callb
 			name: 'mentor hub',
 			type: '',
 			command: '',
-			place: 'The Mentor Hub is on ETB first floor room 124',
+			place: 'The Mentor Hub is on ETB first floor room 124. ${etbMapSentence}',
+		},
+		'sleeping room': {
+			name: 'sleeping room',
+			type: '',
+			command: '',
+			place: 'Sleeping rooms are in ETB 235, 256, and 224. They open from Sat. 10PM to Sun 10AM. ${etbMapSentence}',
+		},
+		'help desk': {
+			name: 'help desk',
+			type: '',
+			command: '',
+			place: 'Help desk is in the ETB lobby on the first floor.',
 		}
+
 		// '': {
 		// 	name: '',
 		// 	type: '',
@@ -261,7 +284,7 @@ module.exports = (user, channel, text = '', command = {}, botToken = null, callb
 		// }
 	}
 
-	text = text.toLowerCase()
+	text = text.toLowerCase().replace(/[^a-zA-Z0-9 ]+/g, '');
 	var command = param[text];
 
 	var where = 'where is';
@@ -281,7 +304,7 @@ module.exports = (user, channel, text = '', command = {}, botToken = null, callb
 	param.sponsors.text += sponsorString;
 
 
-	if(text == where) {
+	if(text == where || (text.slice(where.length).trim().toLowerCase() == 'everything')) {
 		command = {'text': 'Here are the locations I know: \n', attachments: []};
 		command.text += locationString;
 

@@ -1,4 +1,4 @@
-- ~~print list of commands~~
+~~- ~~print list of commands~~~~
 - ~~schedule~~
 - ~~map~~
 - ~~location of <workshop, opening, sponsors, mentor hub, etc>~~
@@ -11,5 +11,7 @@
 - ~~mentors link~~
 - ~~workshop link~~
 - ~~change back slash to forward slash~~
-- ~~add a list of sponsors under sponsor command~~
-- add emergency information
+- ~~add a list of sponsors under sponsor command~~,
+- ~~add emergency information~~
+- ~~sleeping rooms (and times they are available)~~
+- ~~info/help desk~~
